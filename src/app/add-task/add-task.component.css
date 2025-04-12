@@ -1,0 +1,13 @@
+.Form {
+    width: 30%;
+    margin: 2% auto 2% auto;
+}
+
+.form-group {
+    margin: 2% 0% 2% 0%;
+}
+
+label {
+    font-weight: bold;
+    margin: 0% 0% 1% 0%;
+}
