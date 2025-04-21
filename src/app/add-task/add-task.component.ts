@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TasksServiceService } from '../tasks-service.service';
+
 
 @Component({
   selector: 'add-task',
@@ -7,7 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.css']
 })
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent {
   form: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
@@ -49,13 +51,22 @@ export class AddTaskComponent implements OnInit {
   add_task() {
     if (this.form.valid) {
       console.log('Task added:', this.form.value);
-      // Add logic to save the task (e.g., send it to a server)
+      alert('Task added successfully!');
     } else {
       console.log('Form is invalid');
     }
   }
 
-  ngOnInit(): void {
-    // Initialization logic if needed
-  }
+  // add_task() {
+  // let x = <task>this.form.value;
+  // x.time = x.date + " "+this.time.value;
+  // this.service.addTask(x).subscribe((result:{Task:{title}})=>{console.log(result.task.title+" added successfully")},
+  // (err: HttpErrorResponse)=>{console.log(err)
+  // });
+  // this.form.reset();
+  // this.router.navigate(['home']);
+
+
+
+constructor( private service: TasksServiceService) {}
 }

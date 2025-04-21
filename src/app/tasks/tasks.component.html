@@ -1,0 +1,8 @@
+
+<div *ngIf="tasks.length === 0" class="alert alert-info">
+  No tasks available.
+</div>
+
+<div *ngFor="let task of tasks" class="mb-3">
+  <app-task [task]="task"></app-task>
+</div>
