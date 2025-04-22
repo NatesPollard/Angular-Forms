@@ -26,6 +26,18 @@ const tasks = [
     progress_level: 'Not Started'
   }
 ];
+// edit task
+app.put('/tasks/edit_task', (req, res) => {
+  const updatedTask = req.body;
+  const taskIndex = tasks.findIndex((task) => task.id === updatedTask.id);
+
+  if (taskIndex !== -1) {
+    tasks[taskIndex] = updatedTask;
+    res.status(200).json(updatedTask);
+  } else {
+    res.status(404).json({ message: 'Task not found' });
+  }
+});
 
 // Get all tasks
 app.get('/tasks/get_all', (req, res) => {
@@ -42,4 +54,21 @@ app.post('/tasks/add', (req, res) => {
 const PORT = 3000; // Change to a different port
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+});
+
+// Filter tasks by label, priority, or due date
+app.get('/tasks/filter', (req, res) => {
+  const { type, value } = req.query;
+
+  let filteredTasks = tasks;
+
+  if (type === 'label') {
+    filteredTasks = tasks.filter((task) => task.category.toLowerCase() === value.toLowerCase());
+  } else if (type === 'priority') {
+    filteredTasks = tasks.filter((task) => task.priority_level.toLowerCase() === value.toLowerCase());
+  } else if (type === 'due_date') {
+    filteredTasks = tasks.filter((task) => task.date === value);
+  }
+
+  res.json(filteredTasks);
 });

@@ -6,12 +6,12 @@ import { TasksComponent } from './tasks/tasks.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'add-task', component: AddTaskComponent},
   {path: 'tasks', component: TasksComponent},
+  {path: 'add-task', component: AddTaskComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

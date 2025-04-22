@@ -1,8 +1,18 @@
 
+<div>
+  <button (click)="filterTasks('label')">Filter by Label</button>
+  <button (click)="filterTasks('priority')">Filter by Priority</button>
+  <button (click)="filterTasks('due_date')">Filter by Due Date</button>
+</div>
+
+
 <div *ngIf="tasks.length === 0" class="alert alert-info">
   No tasks available.
 </div>
 
-<div *ngFor="let task of tasks" class="mb-3">
-  <app-task [task]="task"></app-task>
+<div *ngFor="let task of tasks">
+  <p>{{ task.title }}</p>
+  <p>Priority: {{ task.priority_level }}</p>
+  <p>Due Date: {{ task.date }}</p>
+  <button (click)="openEditTaskModal(task)">Edit</button>
 </div>
