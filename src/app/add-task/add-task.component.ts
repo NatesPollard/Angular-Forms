@@ -23,7 +23,15 @@ export class AddTaskComponent {
     category: new FormControl('', [Validators.required]),
     progress_level: new FormControl('', [Validators.required])
   });
-
+  constructor( 
+    private service: TasksServiceService,
+   private  router: Router,
+  
+  ) {}
+    
+  
+  
+   ngOnInit(): void {}
     get title() {
       return this.form.get('title');
     }
@@ -56,17 +64,7 @@ export class AddTaskComponent {
       if (this.form.valid) {
         const task = this.form.value;
     
-        if (this.data) {
-          // Editing an existing task
-          this.service.editTask(task).subscribe(
-            (result) => {
-              console.log('Task updated successfully:', result);
-            },
-            (error) => {
-              console.error('Error updating task:', error);
-            }
-          );
-        } else {
+          
           // Adding a new task
           this.service.addTask(task).subscribe(
             (result) => {
@@ -76,10 +74,12 @@ export class AddTaskComponent {
               console.error('Error adding task:', error);
             }
           );
-        }
+        
       } else {
         console.log('Form is invalid');
       }
+
+      console.log(this.form.value);
     }
 
     // add_task() {
@@ -93,17 +93,7 @@ export class AddTaskComponent {
 
 
 
-constructor( 
-  private service: TasksServiceService,
- private  router: Router,
- @Inject(MAT_DIALOG_DATA) public data: Task, // Inject the task data
-) {
-  if (data) {
-    this.form.patchValue(data); // Populate the form with the task data
-  }
-}
 
- ngOnInit(): void {}
 
   
 }
